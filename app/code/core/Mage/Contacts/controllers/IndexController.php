@@ -50,6 +50,16 @@ class Mage_Contacts_IndexController extends Mage_Core_Controller_Front_Action
 
     public function indexAction()
     {
+        echo "<pre>";
+        $mage = new Mage();
+        print_r($mage);
+
+
+
+
+
+
+        die;
         $this->loadLayout();
         $this->getLayout()->getBlock('contactForm')
             ->setFormAction( Mage::getUrl('*/*/post', array('_secure' => $this->getRequest()->isSecure())) );
