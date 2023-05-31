@@ -1,0 +1,9 @@
+<config>
+  <modules>
+    <Ccc_Product>
+      <active>true</active>
+      <codePool>local</codePool>
+      <version>0.1.0</version>
+    </Ccc_Product>
+  </modules>
+</config>

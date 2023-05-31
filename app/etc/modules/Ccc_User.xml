@@ -1,0 +1,9 @@
+<config>
+  <modules>
+    <Ccc_User>
+      <active>true</active>
+      <codePool>local</codePool>
+      <version>0.1.0</version>
+    </Ccc_User>
+  </modules>
+</config>
