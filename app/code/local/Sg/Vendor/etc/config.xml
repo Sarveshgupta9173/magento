@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Sg_Vendor>
+            <version>1.0.0</version>
+        </Sg_Vendor>
+    </modules>
+    <frontend>
+        <routers>
+            <vendor>
+                <use>standard</use>
+                <args>
+                    <module>Sg_Vendor</module>
+                    <frontName>vendor</frontName>
+                </args>
+            </vendor>
+        </routers>
+        <layout>
+            <updates>
+                <vendor>
+                    <file>vendor.xml</file>
+                </vendor>
+            </updates>
+        </layout>
+    </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <vendor>
+                    <file>vendor.xml</file>
+                </vendor>
+            </updates>
+        </layout>
+    </adminhtml>
+    <global>
+        <!-- <resources>
+            <cms_setup>
+                <setup>
+                    <module>Mage_Cms</module>
+                </setup>
+            </cms_setup>
+        </resources> -->
+        <blocks>
+            <vendor>
+                <class>Sg_Vendor_Block</class>
+            </vendor>
+        </blocks>
+    </global>
+</config>
