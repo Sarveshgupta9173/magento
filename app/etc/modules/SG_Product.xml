@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <SG_Product>
+            <active>true</active>
+            <codePool>local</codePool>
+            <version>1.0.0</version>
+        </SG_Product>
+    </modules>
+</config>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<layout>
+    <adminhtml_product_index>
+        <reference name="content">
+            <action method="setTemplate" > <template>page/3column.phtml</template> </action>
+            <block type="product/adminhtml_product" name="adminhtmlProduct" ></block>
+        </reference>
+    </adminhtml_product_index>
+</layout>
