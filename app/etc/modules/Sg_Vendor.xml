@@ -2,10 +2,10 @@
 
 <config>
     <modules>
-        <Sg_Vendor>
+        <SG_Vendor>
             <active>true</active>
             <codePool>local</codePool>
             <version>1.0.0</version>
-        </Sg_Vendor>
+        </SG_Vendor>
     </modules>
 </config>

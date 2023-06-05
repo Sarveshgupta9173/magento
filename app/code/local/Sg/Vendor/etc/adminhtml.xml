@@ -1,42 +1,41 @@
-<?xml version="1.0"?>
-
 <config>
     <menu>
         <vendor module="vendor">
-            <title>Vendors</title>
-            <action>adminhtml/vendor/</action>
-         </vendor>
+            <title>Vendor</title>
+            <sort_order>10</sort_order>
+            <children>
+                <manageVendor module="vendor">
+                    <title>Manage Vendors</title>
+                    <action>vendor/adminhtml_vendor/index</action>
+                    <sort_order>10</sort_order>
+                </manageVendor>
+            </children>
+        </vendor>
     </menu>
-    <!-- <acl>
+    <acl>
         <resources>
+            <all>
+                <title>Allow Everthing</title>
+            </all>
             <admin>
                 <children>
-                    <customer translate="title" module="customer">
-                        <title>Customers</title>
-                        <sort_order>40</sort_order>
+                    <vendor template="title" module="vendor">
+                        <title>Vendors</title>
+                        <sort_order>100</sort_order>
                         <children>
-                            <group translate="title">
-                                <title>Customer Groups</title>
-                                <sort_order>10</sort_order>
-                            </group>
-                            <manage translate="title">
-                                <title>Manage Customers</title>
-                                <sort_order>0</sort_order>
-                            </manage>
-                            <online translate="title">
-                                <title>Online Customers</title>
-                                <sort_order>100</sort_order>
-                            </online>
+                            <manageVendor template="title" >
+                                <title>Manaage Vendor</title>
+                            </manageVendor>
                         </children>
-                    </customer>
+                    </vendor>
                     <system>
                         <children>
                             <config>
                                 <children>
-                                    <customer translate="title" module="customer">
-                                        <title>Customers Section</title>
+                                    <vendor translate="title" module="vendor">
+                                        <title>vendors Section</title>
                                         <sort_order>50</sort_order>
-                                    </customer>
+                                    </vendor>
                                 </children>
                             </config>
                         </children>
@@ -44,5 +43,5 @@
                 </children>
             </admin>
         </resources>
-    </acl> -->
+    </acl>
 </config>
