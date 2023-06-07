@@ -1,0 +1,25 @@
+<config>
+    <modules>
+        <SG_Practice>    
+            <version>1.0.0</version>
+        </SG_Practice>
+    </modules>
+    <frontend>
+        <routers>
+            <practice>
+                <use>standard</use>
+                <args>
+                    <module>SG_Practice</module>
+                    <frontName>practice</frontName>
+                </args>
+            </practice>
+        </routers>
+   </frontend>
+    <global>
+        <helpers>
+           <practice>
+                  <class>SG_Practice_Helper</class>
+            </practice>
+        </helpers>
+    </global>
+</config>
