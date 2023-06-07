@@ -1152,7 +1152,7 @@ class Mage_Core_Model_Url extends Varien_Object
     /**
      * Check and return use SID for URL
      *
-     * @param bool $secure
+     * @param bool $secure 
      * @return bool
      */
     public function useSessionIdForUrl($secure = false)
