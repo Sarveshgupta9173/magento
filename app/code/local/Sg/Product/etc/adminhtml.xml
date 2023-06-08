@@ -1,5 +1,5 @@
 <config>
-    <menu>
+  <!--   <menu>
         <product module="product">
             <title>Product</title>
             <sort_order>10</sort_order>
@@ -11,7 +11,7 @@
                 </manageProduct>
             </children>
         </product>
-    </menu>
+    </menu> -->
     <acl>
         <resources>
             <all>
