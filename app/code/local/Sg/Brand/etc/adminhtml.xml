@@ -1,0 +1,47 @@
+<config>
+    <menu>
+        <brand module="brand">
+            <title>Brand</title>
+            <sort_order>10</sort_order>
+            <children>
+                <manageBrand module="brand">
+                    <title>Manage Brands</title>
+                    <action>brand/adminhtml_brand/index</action>
+                    <sort_order>10</sort_order>
+                </manageBrand>
+            </children>
+        </brand>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everthing</title>
+            </all>
+            <admin>
+                <children>
+                    <brand template="title" module="brand">
+                        <title>Brands</title>
+                        <sort_order>100</sort_order>
+                        <children>
+                            <manageBrand template="title" >
+                                <title>Manaage Brand</title>
+                            </manageBrand>
+                        </children>
+                    </brand>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <brand translate="title" module="brand">
+                                        <title>brands Section</title>
+                                        <sort_order>50</sort_order>
+                                    </brand>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
