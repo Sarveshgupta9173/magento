@@ -116,6 +116,29 @@ class SG_Brand_Adminhtml_BrandController extends Mage_Adminhtml_Controller_Actio
                 }
             }
 
+            if (isset($_FILES['banner']['name']) && ($_FILES['banner']['name'] != '')) 
+            {
+                try {
+                    $uploader = new Varien_File_Uploader('banner');
+                    $uploader->setAllowedExtensions(array('jpg', 'jpeg', 'gif', 'png', 'webp'));
+                    $uploader->setAllowRenameFiles(false);
+                    $uploader->setFilesDispersion(false);
+                    
+                    $path = Mage::getBaseDir('media') . DS . 'brand' . DS.'banner'.DS;
+                    $extension = pathinfo($_FILES['banner']['name'], PATHINFO_EXTENSION);
+                    if ($uploader->save($path, $model->getId().'.'.$extension)) {
+                        $model->banner = 'brand/banner/'.$model->getId().".".$extension;
+                        $model->save();
+                        Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('brand')->__('Image was successfully uploaded'));
+                    }
+                    
+                    // $imageName = $uploader->getUploadedFileName();
+
+                } catch (Exception $e) {
+                    Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+                }
+            }
+
             
             Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('brand')->__('Brand was successfully saved'));
             Mage::getSingleton('adminhtml/session')->setFormData(false);
@@ -132,6 +155,8 @@ class SG_Brand_Adminhtml_BrandController extends Mage_Adminhtml_Controller_Actio
             $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('brand_id')));
             return;
         }
+
+        Mage::dispatchEvent('brand_save_after',array('brand'=>$model));
 
         Mage::getSingleton('adminhtml/session')->addError(Mage::helper('brand')->__('Unable to find brand to save'));
         $this->_redirect('*/*/');
@@ -161,7 +186,7 @@ class SG_Brand_Adminhtml_BrandController extends Mage_Adminhtml_Controller_Actio
         $brandIds = $this->getRequest()->getParam('brand');
         if(!is_array($brandIds)) {
              Mage::getSingleton('adminhtml/session')->addError(Mage::helper('adminhtml')->__('Please select brand(s).'));
-        } else {
+        } else {    
             try {
                 $brand = Mage::getModel('brand/brand');
                 foreach ($brandIds as $brandId) {
