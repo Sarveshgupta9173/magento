@@ -6,7 +6,7 @@ class SG_Brand_Block_Adminhtml_Brand_Grid_Renderer_Image extends Mage_Adminhtml_
     {
         $name = $row->getImage();
         $imageUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$name;
-        $path = "<img src='{$imageUrl}' width='70' height='80'>";
+        $path = "<img src='{$imageUrl}' width='100' height='100'>";
 
         return $path;
     }
