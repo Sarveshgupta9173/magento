@@ -25,35 +25,22 @@ class SG_Vendor_Block_Adminhtml_Vendor_Grid extends Mage_Adminhtml_Block_Widget_
     {
         $baseUrl = $this->getUrl();
 
-        $this->addColumn('first_name', array(
-            'header'    => Mage::helper('vendor')->__('First Name'),
+        $this->addColumn('name', array(
+            'header'    => Mage::helper('vendor')->__('Name'),
             'align'     => 'left',
-            'index'     => 'first_name',
-        ));
-
-        $this->addColumn('last_name', array(
-            'header'    => Mage::helper('vendor')->__('Last Name'),
-            'align'     => 'left',
-            'index'     => 'last_name'
-        ));
-
-        $this->addColumn('mobile', array(
-            'header'    => Mage::helper('vendor')->__('mobile'),
-            'align'     => 'left',
-            'index'     => 'mobile'
+            'index'     => 'name',
         ));
 
         $this->addColumn('email', array(
-            'header'    => Mage::helper('vendor')->__('Email'),
+            'header'    => Mage::helper('vendor')->__('Email '),
             'align'     => 'left',
             'index'     => 'email'
         ));
 
-        $this->addColumn('gender', array(
-            'header'    => Mage::helper('vendor')->__('Gender'),
+        $this->addColumn('mobile', array(
+            'header'    => Mage::helper('vendor')->__('Mobile'),
             'align'     => 'left',
-            'index'     => 'gender',
-
+            'index'     => 'mobile'
         ));
 
         $this->addColumn('status', array(
@@ -61,6 +48,7 @@ class SG_Vendor_Block_Adminhtml_Vendor_Grid extends Mage_Adminhtml_Block_Widget_
             'align'     => 'left',
             'index'     => 'status',
         ));
+
 
         return parent::_prepareColumns();
     }

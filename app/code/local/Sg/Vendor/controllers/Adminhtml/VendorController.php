@@ -88,7 +88,18 @@ class SG_Vendor_Adminhtml_VendorController extends Mage_Adminhtml_Controller_Act
             }
 
             $model->setData($data)->setId($vendorId);
-           
+
+             if ($model->vendor_id != null) {
+                    $model->updated_at = date('Y-m-d H:i:s');
+                    $model->save();
+                    $addressModel->vendor_id = $model->vendor_id;
+                } else {
+                    $model->created_at = date('Y-m-d H:i:s');
+                    $model->save();
+                    $addressModel->vendor_id = $model->vendor_id;
+                    $addressModel->getResource()->setPrimaryKey('address_id');
+                }
+                
             $model->save();
             if ($model->save()) {
                 if ($vendorId) {
@@ -137,4 +148,31 @@ class SG_Vendor_Adminhtml_VendorController extends Mage_Adminhtml_Controller_Act
         }
         $this->_redirect('*/*/');
     }
+
+    public function updateStateOptionsAction()
+    {
+
+        $countryId = $this->getRequest()->getParam('country_id');
+        Mage::log($countryId,null,'country.log');
+        $options = array();
+
+        // print_r($countryId);die;
+        // Retrieve the state options for the selected country
+        $states = Mage::getModel('directory/region')->getResourceCollection()
+            ->addCountryFilter($countryId)
+            ->load();
+        
+        // Build the options array
+        foreach ($states as $state) {
+            $options[] = array(
+                'value' => $state->getId(),
+                'label' => $state->getName()
+            );
+        }
+        
+        // Return the options as JSON response
+        $this->getResponse()->setHeader('Content-type', 'application/json');
+        $this->getResponse()->setBody(json_encode($options));
+    }
+    
 }
