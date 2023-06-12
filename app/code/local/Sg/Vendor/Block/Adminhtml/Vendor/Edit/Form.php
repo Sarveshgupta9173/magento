@@ -17,6 +17,8 @@ class SG_Vendor_Block_Adminhtml_Vendor_Edit_Form extends Mage_Adminhtml_Block_Wi
         return parent::_prepareForm();
     }
 
+   
+
 }
 
 

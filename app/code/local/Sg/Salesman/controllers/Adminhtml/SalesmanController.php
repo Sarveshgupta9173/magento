@@ -112,7 +112,13 @@ class SG_Salesman_Adminhtml_SalesmanController extends Mage_Adminhtml_Controller
             }
 
             $model->setData($data)->setId($salesmanId);
-           
+           if ($model->getCreatedTime() == NULL || $model->getUpdateTime() == NULL)
+            {
+                $model->setCreatedTime(now())->setUpdateTime(now());
+            } 
+            else {
+                $model->setUpdateTime(now());
+            }
             $model->save();
             if ($model->save()) {
                 if ($salesmanId) {
