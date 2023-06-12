@@ -1,16 +1,31 @@
 <?php
 
+
 class SG_Brand_Model_Observer
 {
-    public function generateRewriteUrl($observer)
+     public function prepareRewrite($brandModel)
+    {
+        $brandId = $brandModel->getId();
+        $requestPath = strtolower(str_replace(" ", "-", $brandModel->getData('name'))).'.html';
+        echo $requestPath;echo 11111;die;
+        $targetPath = 'brand/view/view/brand_id/'.$brandId;
+        return $requestPath;
+    }
+
+    public function generateBrandRewriteUrl($observer)
     {
         $brand = $observer->getBrand();
         $urlKey = $brand->getUrlKey();
-        $rewrite = Mage::getModel('core/url_rewrite')->load('brand/'.$brand->getId(),'id_path');
+        $urlKey = $this->prepareRewrite($brand);
+        echo $brand->getId();
+        $rewrite = Mage::getModel('core/url_rewrite');
         $rewrite->setStoreId($brand->getStoreId())
-                ->setIdPath('brand/'.$brand->getId())
+                ->setIdPath('brand/' . $brand->getId())
                 ->setRequestPath($urlKey)
-                ->setTargetPath('brand/frontend/view/brand_id/'.$brand->getId())
+                ->setTargetPath('brand/view/index/brand_id/'. $brand->getId())
+                ->setIsSystem(0)
+                ->setOptions('')
+                ->setDescription('')
                 ->save();
     }
 }

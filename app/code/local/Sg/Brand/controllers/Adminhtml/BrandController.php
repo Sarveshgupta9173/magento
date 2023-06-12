@@ -71,11 +71,7 @@ class SG_Brand_Adminhtml_BrandController extends Mage_Adminhtml_Controller_Actio
     {
         try {
             $model = Mage::getModel('brand/brand');
-            $addressData = $this->getRequest()->getPost('address');
             $data = $this->getRequest()->getPost('brand');
-
-            // echo "<pre>";
-            // print_r($_FILES);die;
 
             $brandId = $this->getRequest()->getParam('id');
             if (!$brandId)
@@ -91,7 +87,12 @@ class SG_Brand_Adminhtml_BrandController extends Mage_Adminhtml_Controller_Actio
             else {
                 $model->setUpdateTime(now());
             }
-            $model->save();
+            $savedData = $model->save();
+
+            if(!$brandId)
+            {
+                Mage::dispatchEvent('brand_save_after', array('brand' => $model));
+            }
 
             if (isset($_FILES['image']['name']) && ($_FILES['image']['name'] != '')) 
             {
@@ -124,11 +125,11 @@ class SG_Brand_Adminhtml_BrandController extends Mage_Adminhtml_Controller_Actio
                     $uploader->setAllowRenameFiles(false);
                     $uploader->setFilesDispersion(false);
                     
-                    $path = Mage::getBaseDir('media') . DS . 'brand' . DS.'banner'.DS;
+                    $path = Mage::getBaseDir('media') . DS . 'brand' . DS.'banner';
                     $extension = pathinfo($_FILES['banner']['name'], PATHINFO_EXTENSION);
-                    if ($uploader->save($path, $model->getId().'.'.$extension)) {
-                        $model->banner = 'brand/banner/'.$model->getId().".".$extension;
-                        $model->save();
+                    if ($uploader->save($path, $savedData->getId().'.'.$extension)) {
+                        $savedData->banner_image = 'brand' . DS.'banner'.DS.$savedData->getId().".".$extension;
+                        if($savedData->save())
                         Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('brand')->__('Image was successfully uploaded'));
                     }
                     
@@ -139,7 +140,6 @@ class SG_Brand_Adminhtml_BrandController extends Mage_Adminhtml_Controller_Actio
                 }
             }
 
-            
             Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('brand')->__('Brand was successfully saved'));
             Mage::getSingleton('adminhtml/session')->setFormData(false);
              
@@ -156,11 +156,10 @@ class SG_Brand_Adminhtml_BrandController extends Mage_Adminhtml_Controller_Actio
             return;
         }
 
-        Mage::dispatchEvent('brand_save_after',array('brand'=>$model));
-
         Mage::getSingleton('adminhtml/session')->addError(Mage::helper('brand')->__('Unable to find brand to save'));
         $this->_redirect('*/*/');
     }
+
 
     public function deleteAction()
     {
