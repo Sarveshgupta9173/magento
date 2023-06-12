@@ -5,6 +5,13 @@
         </SG_Brand>
     </modules>
     <frontend>
+        <layout>
+            <updates>
+                <brand module="SG_Brand">
+                    <file>brand.xml</file>
+                </brand>
+            </updates>
+        </layout>
     </frontend>
     <global>
         <events>
