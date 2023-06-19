@@ -4,7 +4,14 @@
             <version>1.0.1</version>
         </SG_Vendor>
     </modules>
-    <frontend>
+   <frontend>
+        <layout>
+            <updates>
+                <vendor module="SG_Vendor">
+                    <file>vendor.xml</file>
+                </vendor>
+            </updates>
+        </layout>
     </frontend>
     <global>
         <models>

@@ -58,5 +58,35 @@ class SG_Vendor_Block_Adminhtml_Vendor_Grid extends Mage_Adminhtml_Block_Widget_
     {
         return $this->getUrl('*/*/edit', array('vendor_id' => $row->getId()));
     }
+
+    protected function _prepareMassaction()
+    {
+        $this->setMassactionIdField('vendor_id');
+        $this->getMassactionBlock()->setFormFieldName('vendor_id');
+
+        $this->getMassactionBlock()->addItem('delete', array(
+             'label'    => Mage::helper('vendor')->__('Delete'),
+             'url'      => $this->getUrl('*/*/massDelete'),
+             'confirm'  => Mage::helper('vendor')->__('Are you sure?')
+        ));
+
+        $statuses = [1=>'Active',2=>'Inactive'];
+        $this->getMassactionBlock()->addItem('status', array(
+             'label'    => Mage::helper('vendor')->__('Status'),
+             'url'      => $this->getUrl('*/*/massStatus'),
+             'additional' => array(
+                    'visibility' => array(
+                         'name' => 'status',
+                         'type' => 'select',
+                         'class' => 'required-entry',
+                         'label' => Mage::helper('catalog')->__('Update Status'),
+                         'values' => $statuses
+                     )
+             )
+        ));
+
+
+        return $this;
+    }
    
 }

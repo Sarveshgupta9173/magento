@@ -44,12 +44,12 @@ class SG_Brand_Block_Adminhtml_Brand_Grid extends Mage_Adminhtml_Block_Widget_Gr
             'renderer'  => 'SG_Brand_Block_Adminhtml_Brand_Grid_Renderer_Image'
         ));
 
-        $this->addColumn('banner', array(
-            'header'    => Mage::helper('brand')->__('Banner Image'),
-            'align'     => 'left',
-            'index'     => 'image',
-            'renderer'  => 'SG_Brand_Block_Adminhtml_Brand_Grid_Renderer_Banner'
-        ));
+        // $this->addColumn('banner', array(
+        //     'header'    => Mage::helper('brand')->__('Banner Image'),
+        //     'align'     => 'left',
+        //     'index'     => 'image',
+        //     'renderer'  => 'SG_Brand_Block_Adminhtml_Brand_Grid_Renderer_Banner'
+        // ));
 
         $this->addColumn('description', array(
             'header'    => Mage::helper('brand')->__('Description'),
