@@ -1,7 +1,8 @@
 <?php
+
 class SG_Brand_Block_Image extends Mage_Core_Block_Template
 {
-   function __construct()
+    function __construct()
     {
         parent::__construct();
     }
@@ -54,7 +55,9 @@ class SG_Brand_Block_Image extends Mage_Core_Block_Template
         $brandValue = $this->getRequest()->getParam('brand_id'); // Replace with your desired brand attribute value (integer)
         $productCollection = Mage::getModel('catalog/product')->getCollection()
             ->addAttributeToFilter($brandAttributeCode, $brandValue)
+            // ->addAttributeToFilter($categoryAttributeCode, $category)
             ->getAllIds();
+        // echo "<pre>";
         
 
         $products = Mage::getModel('catalog/product')->getCollection()
@@ -66,6 +69,14 @@ class SG_Brand_Block_Image extends Mage_Core_Block_Template
 
         return $products;
     }
+
+
+    // public function getProductUrl($product)
+    // {
+    //     $rewriteCollection = Mage::getModel('core/url_rewrite')->getCollection()
+    //         ->addFieldToFilter('product_id', array('in' => $productIds))
+    //         ->addFieldToFilter('is_system', 1);
+    // }
 
     public function getProductUrl($product)
     {
@@ -85,5 +96,4 @@ class SG_Brand_Block_Image extends Mage_Core_Block_Template
 
         return $categories;
     }
-
 }

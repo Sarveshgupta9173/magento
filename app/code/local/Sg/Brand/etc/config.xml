@@ -17,10 +17,10 @@
         <events>
             <brand_save_after>
                 <observers>
-                    <sg_brand_generate_brand_rewrite_url>
+                    <SG_brand_generate_brand_rewrite_url>
                         <class>SG_Brand_Model_Observer</class>
                         <method>generateRewriteUrl</method>
-                    </sg_brand_generate_brand_rewrite_url>
+                    </SG_brand_generate_brand_rewrite_url>
                 </observers>
             </brand_save_after>
         </events>

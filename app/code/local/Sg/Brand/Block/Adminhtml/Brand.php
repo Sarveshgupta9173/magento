@@ -4,7 +4,6 @@ class SG_Brand_Block_Adminhtml_Brand extends Mage_Adminhtml_Block_Widget_Grid_Co
 {
     public function __construct()
     {
-        
         $this->_blockGroup = 'brand';
         $this->_controller = 'adminhtml_brand';
         $this->_headerText = Mage::helper('brand')->__('Manage Brands');

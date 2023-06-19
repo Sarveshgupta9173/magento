@@ -79,6 +79,7 @@ class SG_Vendor_Adminhtml_VendorController extends Mage_Adminhtml_Controller_Act
         try {
             $model = Mage::getModel('vendor/vendor');
             $addressModel = Mage::getModel('vendor/vendor_address');
+            
             $addressData = $this->getRequest()->getPost('address');
             $data = $this->getRequest()->getPost('vendor');
             $vendorId = $this->getRequest()->getParam('id');
@@ -99,7 +100,7 @@ class SG_Vendor_Adminhtml_VendorController extends Mage_Adminhtml_Controller_Act
                     $addressModel->vendor_id = $model->vendor_id;
                     $addressModel->getResource()->setPrimaryKey('address_id');
                 }
-                
+
             $model->save();
             if ($model->save()) {
                 if ($vendorId) {
@@ -174,5 +175,56 @@ class SG_Vendor_Adminhtml_VendorController extends Mage_Adminhtml_Controller_Act
         $this->getResponse()->setHeader('Content-type', 'application/json');
         $this->getResponse()->setBody(json_encode($options));
     }
+
+    public function massDeleteAction()
+    {
+        $vendorIDs = $this->getRequest()->getParam('vendor_id');
+        if(!is_array($vendorIDs)) {
+             Mage::getSingleton('adminhtml/session')->addError(Mage::helper('adminhtml')->__('Please select vendor(s).'));
+        } else {
+            try {
+                $vendor = Mage::getModel('vendor/vendor');
+                foreach ($vendorIDs as $vendorId) {
+                    $vendor->reset()
+                        ->load($vendorId)
+                        ->delete();
+                }
+                Mage::getSingleton('adminhtml/session')->addSuccess(
+                    Mage::helper('adminhtml')->__('Total of %d record(s) were deleted.', count($vendorIDs))
+                );
+            } catch (Exception $e) {
+                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+            }
+        }
+
+        $this->_redirect('*/*/index');
+    }
+
+     public function massStatusAction()
+    {
+        $vendorsId = $this->getRequest()->getParam('vendor');
+        if(!is_array($vendorsId)) {
+             Mage::getSingleton('adminhtml/session')->addError(Mage::helper('adminhtml')->__('Please select vendor(s).'));
+        } else {
+            try {
+                $vendor = Mage::getModel('vendor/vendor');
+                foreach ($vendorsId as $vendorId) {
+                    $vendor
+                        ->load($vendorId)
+                        ->setStatus($this->getRequest()->getPost('status'))
+                        ->save();
+                }
+                // print_r($vendor);die;
+                Mage::getSingleton('adminhtml/session')->addSuccess(
+                    Mage::helper('adminhtml')->__('Total of %d record(s) were Status Updated.', count($vendorsId))
+                );
+            } catch (Exception $e) {
+                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+            }
+        }
+        $this->_redirect('*/*/index');
+
+    }
+
     
 }

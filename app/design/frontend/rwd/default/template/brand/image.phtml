@@ -1,5 +1,5 @@
 <?php $brandId =  $this->getRequest()->getParam('brand_id'); 
-
+echo 222222;die;
 $products = $this->getProductsByBrand();
 
 $brand = Mage::getModel('brand/brand')->load($brandId);
@@ -12,13 +12,13 @@ $brand = Mage::getModel('brand/brand')->load($brandId);
                 
 <div class="container">
     <div class="banner">
-      <img class="banner-image" src="<?php echo Mage::getBaseUrl('media').$brand->banner_image;?>" alt="Banner Image">
-      <div class="banner-text">
-       <h1><?php echo $brand->name ?></h1>
-        <p><?php echo $brand->description; ?></p>
-      </div>
+        <img class="banner-image" src="<?php echo Mage::getBaseUrl('media').$brand->banner;?>" alt="Banner Image">
+        <div class="banner-text">
+            <h1><?php echo $brand->name ?></h1>
+            <p><?php echo $brand->description; ?></p>
+        </div>
     </div>
-  </div>
+</div>
 
 <div style="display:flex;flex-wrap: wrap;width: 70vw;">
   <?php foreach ($products as $key => $value): ?>   
