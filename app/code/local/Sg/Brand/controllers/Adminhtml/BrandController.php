@@ -45,12 +45,12 @@ class SG_Brand_Adminhtml_BrandController extends Mage_Adminhtml_Controller_Actio
         }
         $this->_title($model->getId() ? $model->getTitle() : $this->__('New Brand'));
 
-        $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
+        // $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
 
-        if (!empty($data)) 
-        {
-            $model->setData($data);
-        }
+        // if (!empty($data)) 
+        // {
+            // $model->setData($data);
+        // }
 
         Mage::register('brand_edit',$model);
 
@@ -88,11 +88,6 @@ class SG_Brand_Adminhtml_BrandController extends Mage_Adminhtml_Controller_Actio
                 $model->setUpdateTime(now());
             }
             $savedData = $model->save();
-
-            if(!$brandId)
-            {
-                Mage::dispatchEvent('brand_save_after', array('brand' => $model));
-            }
 
             if (isset($_FILES['image']['name']) && ($_FILES['image']['name'] != '')) 
             {
